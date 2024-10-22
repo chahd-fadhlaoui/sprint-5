@@ -12,7 +12,7 @@ import com.chahd.users.service.UserService;
 @CrossOrigin(origins = "*")
 public class UserRestController {
 	@Autowired
-	UserService userService;
+	UserService userService;	
 
 	@GetMapping("all")
 	public List<User> getAllUsers() {

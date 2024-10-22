@@ -13,48 +13,44 @@ import com.chahd.users.repos.UserRepository;
 
 @Transactional
 @Service
-public class UserServiceImpl  implements UserService{
+public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserRepository userRep;
-	
-	@Autowired
-	RoleRepository roleRep;
-	
-	
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	@Override
-	public User saveUser(User user) {
-		
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		return userRep.save(user);
-	}
+    @Autowired
+    UserRepository userRep;
 
-	@Override
-	public User addRoleToUser(String username, String rolename) {
-		User usr = userRep.findByUsername(username);
-		Role r = roleRep.findByRole(rolename);
-		
-		usr.getRoles().add(r);
-		return usr;
-	}
+    @Autowired
+    RoleRepository roleRep;
 
-	
-	@Override
-	public Role addRole(Role role) {
-		return roleRep.save(role);
-	}
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Override
-	public User findUserByUsername(String username) {	
-		return userRep.findByUsername(username);
-	}
-	
-	@Override
-	public List<User> findAllUsers() {
-	return userRep.findAll();
-	}
+    @Override
+    public User saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return userRep.save(user);
+    }
 
+    @Override
+    public User addRoleToUser(String username, String rolename) {
+        User usr = userRep.findByUsername(username);
+        Role r = roleRep.findByRole(rolename);
+
+        usr.getRoles().add(r);
+        return usr;
+    }
+
+    @Override
+    public Role addRole(Role role) {
+        return roleRep.save(role);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {    
+        return userRep.findByUsername(username);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRep.findAll();
+    }
 }

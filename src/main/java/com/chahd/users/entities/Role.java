@@ -18,4 +18,12 @@ public class Role {
 @GeneratedValue (strategy=GenerationType.IDENTITY)
 private Long role_id;
 private String role;
+public String getRole() {
+	return role;
+}
+public void setRole(String role) {
+	this.role = role;
+}
+
+
 }
